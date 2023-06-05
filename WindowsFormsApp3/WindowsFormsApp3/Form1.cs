@@ -62,7 +62,8 @@ namespace WindowsFormsApp3
         // GrayScale
         private void button3_Click(object sender, EventArgs e)
         {
-            textBox1.AppendText($"[{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}] Grayscale -> processing... \r\n");
+            DateTime startTime = DateTime.Now;
+            textBox1.AppendText($"[{startTime.ToString("yyyy-MM-dd HH:mm:ss")}] Grayscale -> processing... \r\n");
 
             Bitmap openImg = new Bitmap(pictureBox2.Image);
             Bitmap grayLvImg = new Bitmap (openImg.Width, openImg.Height);
@@ -78,13 +79,17 @@ namespace WindowsFormsApp3
                 }
             pictureBox2.Image = grayLvImg;
 
-            textBox1.AppendText($"[{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}] Grayscale -> Done! \r\n");
+            DateTime endTime = DateTime.Now;
+            TimeSpan timeSpan= endTime.Subtract(startTime);
+
+            textBox1.AppendText($"[{endTime.ToString("yyyy-MM-dd HH:mm:ss")}] Grayscale -> Done! (duration: {(long)timeSpan.TotalMilliseconds} ms) \r\n");
         }
 
         // Binary
         private void button4_Click(object sender, EventArgs e)
         {
-            textBox1.AppendText($"[{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}] Binarization (threshold: {trackBar1.Value} , ForeColor: {button12.BackColor.Name} , BackColor: {button13.BackColor.Name}) -> processing... \r\n");
+            DateTime startTime = DateTime.Now;
+            textBox1.AppendText($"[{startTime.ToString("yyyy-MM-dd HH:mm:ss")}] Binarization (threshold: {trackBar1.Value} , ForeColor: {button12.BackColor.Name} , BackColor: {button13.BackColor.Name}) -> processing... \r\n");
 
             Bitmap openImg = new Bitmap(pictureBox2.Image);
             Bitmap resultImg = new Bitmap(openImg.Width, openImg.Height);
@@ -99,23 +104,24 @@ namespace WindowsFormsApp3
 
                     if (grayLv>=threshold)
                     {
-                        // resultImg.SetPixel(j,i,Color.FromArgb(255,255,255));
                         resultImg.SetPixel(j,i, button12.BackColor);
                     }
                     else
                     {
-                        // resultImg.SetPixel(j,i,Color.FromArgb(0,0,0));
                         resultImg.SetPixel(j, i, button13.BackColor);
                     }
                 }
             pictureBox2.Image = resultImg;
-            textBox1.AppendText($"[{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}] Binarization -> Done! \r\n");
+            DateTime endTime = DateTime.Now;
+            TimeSpan timeSpan = endTime.Subtract(startTime);
+            textBox1.AppendText($"[{endTime.ToString("yyyy-MM-dd HH:mm:ss")}] Binarization -> Done! (duration: {(long)timeSpan.TotalMilliseconds} ms) \r\n");
         }
 
         // Robert - Edge Detection
         private void button5_Click(object sender, EventArgs e)
         {
-            textBox1.AppendText($"[{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}] Robert - Edge Detection (threshold: {trackBar2.Value} , HighLightColor: {button14.BackColor.Name}) -> processing... \r\n");
+            DateTime startTime = DateTime.Now;
+            textBox1.AppendText($"[{startTime.ToString("yyyy-MM-dd HH:mm:ss")}] Robert - Edge Detection (threshold: {trackBar2.Value} , HighLightColor: {button14.BackColor.Name}) -> processing... \r\n");
 
             Bitmap openImg = new Bitmap(pictureBox2.Image);
             Bitmap robertImg = new Bitmap(openImg.Width,openImg.Height);
@@ -176,7 +182,10 @@ namespace WindowsFormsApp3
                     }
                 }
             pictureBox2.Image= robertImg;
-            textBox1.AppendText($"[{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}] Robert - Edge Detection -> Done! \r\n");
+
+            DateTime endTime = DateTime.Now;
+            TimeSpan timeSpan = endTime.Subtract(startTime);
+            textBox1.AppendText($"[{endTime.ToString("yyyy-MM-dd HH:mm:ss")}] Robert - Edge Detection -> Done! (duration: {(long)timeSpan.TotalMilliseconds} ms) \r\n");
         }
 
         // Reset button
@@ -201,7 +210,8 @@ namespace WindowsFormsApp3
         // Flip Vertically
         private void button7_Click(object sender, EventArgs e)
         {
-            textBox1.AppendText($"[{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}] Flip Vertically -> processing... \r\n");
+            DateTime startTime = DateTime.Now;
+            textBox1.AppendText($"[{startTime.ToString("yyyy-MM-dd HH:mm:ss")}] Flip Vertically -> processing... \r\n");
 
             Bitmap openImg = new Bitmap(pictureBox2.Image);
             Bitmap resultImg = new Bitmap(openImg.Width, openImg.Height);
@@ -213,13 +223,17 @@ namespace WindowsFormsApp3
                     resultImg.SetPixel(j, openImg.Height - i - 1, RGB);
                 }
             pictureBox2.Image= resultImg;
-            textBox1.AppendText($"[{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}] Flip Vertically -> Done!\r\n");
+
+            DateTime endTime = DateTime.Now;
+            TimeSpan timeSpan = endTime.Subtract(startTime);
+            textBox1.AppendText($"[{endTime.ToString("yyyy-MM-dd HH:mm:ss")}] Flip Vertically -> Done! (duration: {(long)timeSpan.TotalMilliseconds} ms) \r\n");
         }
 
         // Flop Horizontally
         private void button8_Click(object sender, EventArgs e)
         {
-            textBox1.AppendText($"[{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}] Flop Horizontally -> processing... \r\n");
+            DateTime startTime = DateTime.Now;
+            textBox1.AppendText($"[{startTime.ToString("yyyy-MM-dd HH:mm:ss")}] Flop Horizontally -> processing... \r\n");
 
             Bitmap openImg = new Bitmap(pictureBox2.Image);
             Bitmap resultImg = new Bitmap(openImg.Width, openImg.Height);
@@ -232,13 +246,16 @@ namespace WindowsFormsApp3
                 }
             pictureBox2.Image = resultImg;
 
-            textBox1.AppendText($"[{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}] Flop Horizontally -> Done! \r\n");
+            DateTime endTime = DateTime.Now;
+            TimeSpan timeSpan = endTime.Subtract(startTime);
+            textBox1.AppendText($"[{endTime.ToString("yyyy-MM-dd HH:mm:ss")}] Flop Horizontally -> Done! (duration: {(long)timeSpan.TotalMilliseconds} ms) \r\n");
         }
 
         // 90 degrees Clockwise rotation
         private void button9_Click(object sender, EventArgs e)
         {
-            textBox1.AppendText($"[{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}] Rotating 90 degrees ClockWise -> processing... \r\n");
+            DateTime startTime = DateTime.Now;
+            textBox1.AppendText($"[{startTime.ToString("yyyy-MM-dd HH:mm:ss")}] Rotating 90 degrees ClockWise -> processing... \r\n");
 
             Bitmap openImg = new Bitmap(pictureBox2.Image);
             Bitmap resultImg = new Bitmap(openImg.Height, openImg.Width); // Width, Height exchange (because 90 degrees)
@@ -251,12 +268,15 @@ namespace WindowsFormsApp3
                 }
             pictureBox2.Image = resultImg;
 
-            textBox1.AppendText($"[{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}] Rotating 90 degrees ClockWise -> Done! \r\n");
+            DateTime endTime = DateTime.Now;
+            TimeSpan timeSpan = endTime.Subtract(startTime);
+            textBox1.AppendText($"[{endTime.ToString("yyyy-MM-dd HH:mm:ss")}] Rotating 90 degrees ClockWise -> Done! (duration: {(long)timeSpan.TotalMilliseconds} ms) \r\n");
         }
 
         // 90 degrees counter-Clockwise rotation
         private void button10_Click(object sender, EventArgs e)
         {
+            DateTime startTime = DateTime.Now;
             textBox1.AppendText($"[{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}] Rotating 90 degrees Counter-ClockWise -> processing... \r\n");
 
             Bitmap openImg = new Bitmap(pictureBox2.Image);
@@ -270,13 +290,16 @@ namespace WindowsFormsApp3
                 }
             pictureBox2.Image = resultImg;
 
-            textBox1.AppendText($"[{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}] Rotating 90 degrees Counter-ClockWise -> Done! \r\n");
+            DateTime endTime = DateTime.Now;
+            TimeSpan timeSpan = endTime.Subtract(startTime);
+            textBox1.AppendText($"[{endTime.ToString("yyyy-MM-dd HH:mm:ss")}] Rotating 90 degrees Counter-ClockWise -> Done! (duration: {(long)timeSpan.TotalMilliseconds} ms) \r\n");
         }
 
         // 180 degrees rotation
         private void button11_Click(object sender, EventArgs e)
         {
-            textBox1.AppendText($"[{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}] 180 degrees rotation -> processing...\r\n");
+            DateTime startTime = DateTime.Now;
+            textBox1.AppendText($"[{startTime.ToString("yyyy-MM-dd HH:mm:ss")}] 180 degrees rotation -> processing...\r\n");
 
             Bitmap openImg = new Bitmap(pictureBox2.Image);
             Bitmap resultImg = new Bitmap(openImg.Width, openImg.Height);
@@ -289,7 +312,9 @@ namespace WindowsFormsApp3
                 }
             pictureBox2.Image = resultImg;
 
-            textBox1.AppendText($"[{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}] 180 degrees rotation -> Done!\r\n");
+            DateTime endTime = DateTime.Now;
+            TimeSpan timeSpan = endTime.Subtract(startTime);
+            textBox1.AppendText($"[{endTime.ToString("yyyy-MM-dd HH:mm:ss")}] 180 degrees rotation -> Done! (duration: {(long)timeSpan.TotalMilliseconds} ms) \r\n");
         }
 
         // Select Binarization ForeColor
@@ -388,7 +413,8 @@ namespace WindowsFormsApp3
         // Inverse color
         private void button18_Click(object sender, EventArgs e)
         {
-            textBox1.AppendText($"[{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}] Inverse color -> processing... \r\n");
+            DateTime startTime = DateTime.Now;
+            textBox1.AppendText($"[{startTime.ToString("yyyy-MM-dd HH:mm:ss")}] Inverse color -> processing... \r\n");
 
             Bitmap openImg = new Bitmap(pictureBox2.Image);
             Bitmap resultImg = new Bitmap(openImg.Width, openImg.Height);
@@ -401,7 +427,9 @@ namespace WindowsFormsApp3
                 }
             pictureBox2.Image = resultImg;
 
-            textBox1.AppendText($"[{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}] Inverse color -> Done! \r\n");
+            DateTime endTime = DateTime.Now;
+            TimeSpan timeSpan = endTime.Subtract(startTime);
+            textBox1.AppendText($"[{endTime.ToString("yyyy-MM-dd HH:mm:ss")}] Inverse color -> Done! (duration: {(long)timeSpan.TotalMilliseconds} ms) \r\n");
         }
     }
 }
