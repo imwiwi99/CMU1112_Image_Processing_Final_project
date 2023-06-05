@@ -34,17 +34,13 @@ namespace WindowsFormsApp3
                 long length = new System.IO.FileInfo(openFileDialog1.FileName).Length/1000;
                 textBox1.AppendText($"(Loaded picture info) {pictureBox1.Image.Size} , File Size: {length} KB\r\n");
             }
-            else
-            {
-                // textBox1.AppendText($"Cancel \r\n");
-            }
         }
 
         // Save picture
         private void button2_Click(object sender, EventArgs e)
         {
-            // textBox1.AppendText($"[{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}] Saving picture... ");
-
+            if (pictureBox2.Image != null)
+            {
             SaveFileDialog saveFileDialog1 = new SaveFileDialog();
             saveFileDialog1.Filter = "JPeg Image|*.jpg|Bitmap Image|*.bmp|Gif Image|*.gif";
             saveFileDialog1.Title = "Save Result Image";
@@ -57,11 +53,21 @@ namespace WindowsFormsApp3
                 long length = new System.IO.FileInfo(saveFileDialog1.FileName).Length / 1000;
                 textBox1.AppendText($"(Saved picture info) {pictureBox2.Image.Size} , File Size: {length} KB\r\n");
             }
+            }
+            else
+            {
+                textBox1.AppendText($"[{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}] Error! No image is found. Please press \"Load...\" button for further processing. \r\n");
+            }
+
+
+
         }
 
         // GrayScale
         private void button3_Click(object sender, EventArgs e)
         {
+            if(pictureBox2.Image != null)
+            {
             DateTime startTime = DateTime.Now;
             textBox1.AppendText($"[{startTime.ToString("yyyy-MM-dd HH:mm:ss")}] Grayscale -> processing... \r\n");
 
@@ -83,11 +89,21 @@ namespace WindowsFormsApp3
             TimeSpan timeSpan= endTime.Subtract(startTime);
 
             textBox1.AppendText($"[{endTime.ToString("yyyy-MM-dd HH:mm:ss")}] Grayscale -> Done! (duration: {(long)timeSpan.TotalMilliseconds} ms) \r\n");
+
+            }
+            else
+            {
+                textBox1.AppendText($"[{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}] Error! No image is found. Please press \"Load...\" button for further processing. \r\n");
+            }
+
         }
 
         // Binary
         private void button4_Click(object sender, EventArgs e)
         {
+
+            if (pictureBox2.Image != null)
+            {
             DateTime startTime = DateTime.Now;
             textBox1.AppendText($"[{startTime.ToString("yyyy-MM-dd HH:mm:ss")}] Binarization (threshold: {trackBar1.Value} , ForeColor: {button12.BackColor.Name} , BackColor: {button13.BackColor.Name}) -> processing... \r\n");
 
@@ -115,11 +131,19 @@ namespace WindowsFormsApp3
             DateTime endTime = DateTime.Now;
             TimeSpan timeSpan = endTime.Subtract(startTime);
             textBox1.AppendText($"[{endTime.ToString("yyyy-MM-dd HH:mm:ss")}] Binarization -> Done! (duration: {(long)timeSpan.TotalMilliseconds} ms) \r\n");
+
+            }
+            else
+            {
+                textBox1.AppendText($"[{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}] Error! No image is found. Please press \"Load...\" button for further processing. \r\n");
+            }
         }
 
         // Robert - Edge Detection
         private void button5_Click(object sender, EventArgs e)
         {
+            if (pictureBox2.Image!= null)
+            {
             DateTime startTime = DateTime.Now;
             textBox1.AppendText($"[{startTime.ToString("yyyy-MM-dd HH:mm:ss")}] Robert - Edge Detection (threshold: {trackBar2.Value} , HighLightColor: {button14.BackColor.Name}) -> processing... \r\n");
 
@@ -186,6 +210,12 @@ namespace WindowsFormsApp3
             DateTime endTime = DateTime.Now;
             TimeSpan timeSpan = endTime.Subtract(startTime);
             textBox1.AppendText($"[{endTime.ToString("yyyy-MM-dd HH:mm:ss")}] Robert - Edge Detection -> Done! (duration: {(long)timeSpan.TotalMilliseconds} ms) \r\n");
+
+            }
+            else
+            {
+                textBox1.AppendText($"[{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}] Error! No image is found. Please press \"Load...\" button for further processing. \r\n");
+            }
         }
 
         // Reset button
@@ -210,6 +240,8 @@ namespace WindowsFormsApp3
         // Flip Vertically
         private void button7_Click(object sender, EventArgs e)
         {
+            if (pictureBox2.Image != null)
+            {
             DateTime startTime = DateTime.Now;
             textBox1.AppendText($"[{startTime.ToString("yyyy-MM-dd HH:mm:ss")}] Flip Vertically -> processing... \r\n");
 
@@ -227,11 +259,19 @@ namespace WindowsFormsApp3
             DateTime endTime = DateTime.Now;
             TimeSpan timeSpan = endTime.Subtract(startTime);
             textBox1.AppendText($"[{endTime.ToString("yyyy-MM-dd HH:mm:ss")}] Flip Vertically -> Done! (duration: {(long)timeSpan.TotalMilliseconds} ms) \r\n");
+
+            }
+            else
+            {
+                textBox1.AppendText($"[{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}] Error! No image is found. Please press \"Load...\" button for further processing. \r\n");
+            }
         }
 
         // Flop Horizontally
         private void button8_Click(object sender, EventArgs e)
         {
+            if (pictureBox2.Image != null)
+            {
             DateTime startTime = DateTime.Now;
             textBox1.AppendText($"[{startTime.ToString("yyyy-MM-dd HH:mm:ss")}] Flop Horizontally -> processing... \r\n");
 
@@ -249,11 +289,19 @@ namespace WindowsFormsApp3
             DateTime endTime = DateTime.Now;
             TimeSpan timeSpan = endTime.Subtract(startTime);
             textBox1.AppendText($"[{endTime.ToString("yyyy-MM-dd HH:mm:ss")}] Flop Horizontally -> Done! (duration: {(long)timeSpan.TotalMilliseconds} ms) \r\n");
+
+            }
+            else
+            {
+                textBox1.AppendText($"[{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}] Error! No image is found. Please press \"Load...\" button for further processing. \r\n");
+            }
         }
 
         // 90 degrees Clockwise rotation
         private void button9_Click(object sender, EventArgs e)
         {
+            if (pictureBox2.Image != null)
+            {
             DateTime startTime = DateTime.Now;
             textBox1.AppendText($"[{startTime.ToString("yyyy-MM-dd HH:mm:ss")}] Rotating 90 degrees ClockWise -> processing... \r\n");
 
@@ -271,11 +319,19 @@ namespace WindowsFormsApp3
             DateTime endTime = DateTime.Now;
             TimeSpan timeSpan = endTime.Subtract(startTime);
             textBox1.AppendText($"[{endTime.ToString("yyyy-MM-dd HH:mm:ss")}] Rotating 90 degrees ClockWise -> Done! (duration: {(long)timeSpan.TotalMilliseconds} ms) \r\n");
+
+            }
+            else
+            {
+                textBox1.AppendText($"[{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}] Error! No image is found. Please press \"Load...\" button for further processing. \r\n");
+            }
         }
 
         // 90 degrees counter-Clockwise rotation
         private void button10_Click(object sender, EventArgs e)
         {
+            if (pictureBox2.Image != null)
+            {
             DateTime startTime = DateTime.Now;
             textBox1.AppendText($"[{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}] Rotating 90 degrees Counter-ClockWise -> processing... \r\n");
 
@@ -293,11 +349,19 @@ namespace WindowsFormsApp3
             DateTime endTime = DateTime.Now;
             TimeSpan timeSpan = endTime.Subtract(startTime);
             textBox1.AppendText($"[{endTime.ToString("yyyy-MM-dd HH:mm:ss")}] Rotating 90 degrees Counter-ClockWise -> Done! (duration: {(long)timeSpan.TotalMilliseconds} ms) \r\n");
+
+            }
+            else
+            {
+                textBox1.AppendText($"[{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}] Error! No image is found. Please press \"Load...\" button for further processing. \r\n");
+            }
         }
 
         // 180 degrees rotation
         private void button11_Click(object sender, EventArgs e)
         {
+            if (pictureBox2.Image != null)
+            {
             DateTime startTime = DateTime.Now;
             textBox1.AppendText($"[{startTime.ToString("yyyy-MM-dd HH:mm:ss")}] 180 degrees rotation -> processing...\r\n");
 
@@ -315,6 +379,12 @@ namespace WindowsFormsApp3
             DateTime endTime = DateTime.Now;
             TimeSpan timeSpan = endTime.Subtract(startTime);
             textBox1.AppendText($"[{endTime.ToString("yyyy-MM-dd HH:mm:ss")}] 180 degrees rotation -> Done! (duration: {(long)timeSpan.TotalMilliseconds} ms) \r\n");
+
+            }
+            else
+            {
+                textBox1.AppendText($"[{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}] Error! No image is found. Please press \"Load...\" button for further processing. \r\n");
+            }
         }
 
         // Select Binarization ForeColor
@@ -413,6 +483,8 @@ namespace WindowsFormsApp3
         // Inverse color
         private void button18_Click(object sender, EventArgs e)
         {
+            if(pictureBox2.Image != null)
+            {
             DateTime startTime = DateTime.Now;
             textBox1.AppendText($"[{startTime.ToString("yyyy-MM-dd HH:mm:ss")}] Inverse color -> processing... \r\n");
 
@@ -430,6 +502,12 @@ namespace WindowsFormsApp3
             DateTime endTime = DateTime.Now;
             TimeSpan timeSpan = endTime.Subtract(startTime);
             textBox1.AppendText($"[{endTime.ToString("yyyy-MM-dd HH:mm:ss")}] Inverse color -> Done! (duration: {(long)timeSpan.TotalMilliseconds} ms) \r\n");
+
+            }
+            else
+            {
+                textBox1.AppendText($"[{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}] Error! No image is found. Please press \"Load...\" button for further processing. \r\n");
+            }
         }
     }
 }
